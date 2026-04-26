@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "../globals.css";
 import { cn } from "@/lib/utils";
-import Header from "@/components/sections/Header";
+import Header from "@/components/sections/Header/Header";
 import { Toaster } from 'react-hot-toast'
+import Footer from "@/components/sections/Footer";
 
 
 
@@ -36,10 +37,11 @@ export default function RootLayout({
             }
           }}
         />
-        <div className="flex items-center justify-center mt-5">
+        <div className="flex items-center justify-center mt-10">
           <Header />
         </div>
         {children}
+        <Footer />
       </body>
     </html>
   );
