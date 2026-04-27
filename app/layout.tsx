@@ -7,7 +7,6 @@ import { Toaster } from 'react-hot-toast'
 
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-sans' });
 
-
 export const metadata: Metadata = {
     title: "Tasko | Smart Task Management",
     description: "Tasko | The Full stack task management application build with nextjs",
@@ -21,6 +20,7 @@ export default function RootLayout({
     return (
         <html
             lang="en"
+            data-scroll-behavior="smooth"
             className={cn("h-full", "antialiased", "font-sans", montserrat.variable)}
         >
             <body className="min-h-full flex flex-col dark">

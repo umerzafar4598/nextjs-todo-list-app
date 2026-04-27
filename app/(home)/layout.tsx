@@ -1,13 +1,7 @@
+
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
-import "../globals.css";
-import { cn } from "@/lib/utils";
 import Header from "@/components/sections/Header/Header";
-import { Toaster } from 'react-hot-toast'
 import Footer from "@/components/sections/Footer";
-
-
-const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-sans' });
 
 
 export const metadata: Metadata = {
@@ -21,27 +15,12 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("h-full", "antialiased", "font-sans", montserrat.variable)}
-    >
-      <body className="min-h-full flex flex-col dark">
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              background: '#605B51',
-              color: '#7008e7',
-              border: '1px solid #454040',
-            }
-          }}
-        />
-        <div className="flex items-center justify-center mt-10">
-          <Header />
-        </div>
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <>
+      <div className="flex items-center justify-center mt-10">
+        <Header />
+      </div>
+      {children}
+      <Footer />
+    </>
   );
 }
