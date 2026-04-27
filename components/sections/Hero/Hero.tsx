@@ -33,8 +33,8 @@ const Hero = () => {
                 </motion.p>
             </div>
             <motion.div variants={children} className='flex items-center justify-center gap-8'>
-                <Link href='/'><Button size='lg'>Get Started - It&apos;s free</Button></Link>
-                <Link href='https://github.com/umerzafar4598/nextjs-todo-list-app'><Button size='lg' variant='outline'>View on GitHub</Button></Link>
+                <Link href='/dashboard'><Button size='lg'>Get Started - It&apos;s free</Button></Link>
+                <Link href='https://github.com/umerzafar4598/nextjs-todo-list-app' target="_blank"><Button size='lg' variant='outline'>View on GitHub</Button></Link>
             </motion.div>
         </motion.section>
     )

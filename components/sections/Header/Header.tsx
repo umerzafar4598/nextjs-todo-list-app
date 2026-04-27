@@ -5,6 +5,7 @@ import { Button } from "../../ui/button"
 import { FaArrowRightLong } from "react-icons/fa6"
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
 
 const navItem = [
     { name: "Features", href: "#features" },
@@ -47,9 +48,11 @@ const Header = () => {
 
                 {/* DESKTOP CTA */}
                 <div className="hidden md:block md:pl-5">
-                    <Button>
-                        Try Free
-                        <FaArrowRightLong />
+                    <Button >
+                        <Link href='/dashboard' className="flex items-center justify-center gap-2">
+                            Try Free
+                            <FaArrowRightLong />
+                        </Link>
                     </Button>
                 </div>
 
@@ -86,8 +89,10 @@ const Header = () => {
 
                         <div className="mt-5">
                             <Button className="w-full">
-                                Try Free
-                                <FaArrowRightLong />
+                                <Link href='/dashboard' className="flex items-center justify-center gap-2">
+                                    Try Free
+                                    <FaArrowRightLong />
+                                </Link>
                             </Button>
                         </div>
                     </motion.div>

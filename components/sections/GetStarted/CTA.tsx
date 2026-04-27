@@ -4,6 +4,7 @@ import { motion } from "motion/react"
 import { Button } from "../../ui/button"
 import { Copy, Check } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 const GetStarted = () => {
     const [copied, setCopied] = useState(false)
@@ -53,12 +54,12 @@ const GetStarted = () => {
                         asChild
                         className="px-6"
                     >
-                        <a
-                            href="https://github.com/your-username/tasko"
+                        <Link
+                            href="https://github.com/umerzafar4598/nextjs-todo-list-app"
                             target="_blank"
                         >
                             Clone Repository
-                        </a>
+                        </Link>
                     </Button>
                 </div>
             </motion.div>
