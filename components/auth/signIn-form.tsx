@@ -1,20 +1,45 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
 import { motion } from "motion/react";
-
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { AuthActionState } from "@/types/action-state";
+import { signInAction } from "@/actions/authAction";
+import { toast } from "sonner";
 
 
 interface SignInFormProps {
     onToggle: () => void;
 }
 
+const initialState: AuthActionState = {
+    success: false,
+    message: '',
+    errors: {},
+}
+
 
 export default function SignInForm({ onToggle }: SignInFormProps) {
+    const router = useRouter();
+    const [showPassword, setShowPassword] = useState(false);
+    const [state, formAction, pending] = useActionState(signInAction, initialState)
+    console.log(state)
+
+
+    useEffect(() => {
+        if (state.success) {
+            toast.success("Login Successfull", { description: state.message, position: "bottom-center" })
+            router.push("/dashboard")
+        }
+        if (!state.success && state.message) {
+            toast.error("Login Failed!.Try again", { description: state.message, position: "bottom-center" })
+        }
+    }, [state, router])
 
     return (
         <motion.div
@@ -27,19 +52,25 @@ export default function SignInForm({ onToggle }: SignInFormProps) {
                 <p className="text-zinc-400 text-sm">Sign in to your account to continue</p>
             </div>
 
-            <form action='' className="space-y-5">
+            <form action={formAction} className="space-y-5">
                 <div className="space-y-1.5">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="signin-email">Email</Label>
                     <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                         <Input
-                            id="email"
+                            id="signin-email"
+                            name="signin-email"
                             type="email"
                             placeholder="you@example.com"
                             className="pl-10"
+                            defaultValue={state.values?.email || ""}
                         />
                     </div>
-                    {/* {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>} */}
+                    {state.errors?.email && (
+                        <p id="email-error" className="text-red-500 text-sm">
+                            {state.errors.email[0]}
+                        </p>
+                    )}
                 </div>
 
                 <div className="space-y-1.5">
@@ -48,26 +79,30 @@ export default function SignInForm({ onToggle }: SignInFormProps) {
                         <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                         <Input
                             id="password"
-                            //   type={showPassword ? "text" : "password"}
+                            type={showPassword ? "text" : "password"}
                             placeholder="••••••••"
                             className="pl-10 pr-10"
-                        //   value={formData.password}
-                        //   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                            name="password"
+                            defaultValue={state.values?.password || ""}
                         />
                         <button
                             type="button"
-                            //   onClick={() => setShowPassword(!showPassword)}
+                            onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
                         >
-                            {/* {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />} */}
+                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                     </div>
-                    {/* {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password}</p>} */}
+                    {state.errors?.password && (
+                        <p id="password-error" className="text-red-500 text-sm">
+                            {state.errors.password[0]}
+                        </p>
+                    )}
                 </div>
 
-                <Button type="submit" className="w-full h-11">
-                    {/* {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null} */}
-                    Sign In
+                <Button type="submit" className="w-full h-11" disabled={pending}>
+                    {pending ? "Signing in..." : "Sign In"}
+
                 </Button>
             </form>
 
