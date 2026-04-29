@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, index, uuid } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -73,9 +73,26 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
+export const todos = pgTable("todos", {
+  id: uuid('id').primaryKey().defaultRandom(),
+  title: text("title").notNull(),
+  description: text("description"),
+  completed: boolean("completed").notNull().default(false),
+  deadline: timestamp("deadline").notNull(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+})
+
+
+
+// Relations 
+
+
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  todos: many(todos),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -88,6 +105,13 @@ export const sessionRelations = relations(session, ({ one }) => ({
 export const accountRelations = relations(account, ({ one }) => ({
   user: one(user, {
     fields: [account.userId],
+    references: [user.id],
+  }),
+}));
+
+export const todosRelations = relations(todos, ({ one }) => ({
+  user: one(user, {
+    fields: [todos.userId],
     references: [user.id],
   }),
 }));

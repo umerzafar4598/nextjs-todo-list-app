@@ -1,3 +1,5 @@
+import { fetchTodosAction } from "@/actions/todosAction"
+import { DashboardShell } from "@/components/TodoApp/DashboardShell"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
@@ -7,10 +9,13 @@ const Dashboard = async () => {
     if (!session) {
         redirect('/login')
     }
+    const result = await fetchTodosAction();
+    const initialTodos = result.success ? result.data : [];
     return (
-        <div>
-            <h1 className="text-center text-3xl">Welcome {session.user.name}</h1>
-        </div>
+        <DashboardShell
+            initialTodos={initialTodos}
+            userName={session.user.name ?? session.user.email}
+        />
     )
 }
 

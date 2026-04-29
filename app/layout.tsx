@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from '@/components/ui/sonner'
+import { ReduxProvider } from "@/components/ReduxProvider";
 
 const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -23,8 +24,10 @@ export default function RootLayout({
             className={cn("h-full", "antialiased", "font-sans", montserrat.variable)}
         >
             <body className="min-h-full flex flex-col dark">
-                {children}
-                <Toaster />
+                <ReduxProvider>
+                    {children}
+                    <Toaster />
+                </ReduxProvider>
             </body>
         </html>
     );
