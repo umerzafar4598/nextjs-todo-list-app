@@ -2,7 +2,6 @@ import Features from "@/components/sections/Features/Features";
 import CTA from "@/components/sections/GetStarted/CTA";
 import Hero from "@/components/sections/Hero/Hero"
 import TechStack from "@/components/sections/TechStack/TechStack";
-import 'animate.css';
 
 
 const Home = () => {
