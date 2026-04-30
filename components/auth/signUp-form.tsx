@@ -10,6 +10,7 @@ import { AuthActionState } from "@/types/auth-state";
 import { signUpAction } from "@/actions/authAction";
 import { toast } from 'sonner'
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 
 interface SignUpFormProps {
@@ -24,8 +25,23 @@ const initialState: AuthActionState = {
 
 export default function SignUpForm({ onToggle }: SignUpFormProps) {
     const router = useRouter();
+    const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
     const [state, formAction, pending] = useActionState(signUpAction, initialState)
+
+    const handleGitHubSignUp = async () => {
+        setLoading(true);
+        try {
+            await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/dashboard",
+            });
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+        }
+    };
+
 
     useEffect(() => {
         if (!state.message) return
@@ -119,6 +135,14 @@ export default function SignUpForm({ onToggle }: SignUpFormProps) {
                     {pending ? "Creating..." : "Create Account"}
                 </Button>
             </form>
+            <Button
+                variant='outline'
+                className="w-full h-11 mt-2"
+                onClick={handleGitHubSignUp}
+                disabled={loading}
+            >
+                {loading ? "Redirecting..." : "Sign up with Github"}
+            </Button>
 
             <p className="text-center text-sm text-zinc-400 mt-6">
                 Already have an account?{" "}

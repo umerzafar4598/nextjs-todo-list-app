@@ -11,6 +11,8 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { AuthActionState } from "@/types/auth-state";
 import { signInAction } from "@/actions/authAction";
 import { toast } from "sonner";
+import { Separator } from "../ui/separator";
+import { authClient } from "@/lib/auth-client";
 
 
 interface SignInFormProps {
@@ -25,10 +27,25 @@ const initialState: AuthActionState = {
 
 
 export default function SignInForm({ onToggle }: SignInFormProps) {
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [state, formAction, pending] = useActionState(signInAction, initialState)
-    console.log(state)
+
+    const handleGitHubSignIn = async () => {
+        setLoading(true);
+
+        try {
+            await authClient.signIn.social({
+                provider: "github",
+                callbackURL: "/dashboard",
+            });
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+        }
+    };
+
 
 
     useEffect(() => {
@@ -52,7 +69,7 @@ export default function SignInForm({ onToggle }: SignInFormProps) {
                 <p className="text-zinc-400 text-sm">Sign in to your account to continue</p>
             </div>
 
-            <form action={formAction} className="space-y-5">
+            <form action={formAction} className="space-y-5 mb-2">
                 <div className="space-y-1.5">
                     <Label htmlFor="signin-email">Email</Label>
                     <div className="relative">
@@ -102,9 +119,17 @@ export default function SignInForm({ onToggle }: SignInFormProps) {
 
                 <Button type="submit" className="w-full h-11" disabled={pending}>
                     {pending ? "Signing in..." : "Sign In"}
-
                 </Button>
             </form>
+            <Separator />
+            <Button
+                variant='outline'
+                className="w-full h-11 mt-2"
+                onClick={handleGitHubSignIn}
+                disabled={loading}
+            >
+                {loading ? "Redirecting..." : "Sign in with Github"}
+            </Button>
 
             <p className="text-center text-sm text-zinc-400 mt-6">
                 Don&apos;t have an account?{" "}
