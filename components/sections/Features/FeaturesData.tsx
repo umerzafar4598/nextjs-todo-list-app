@@ -20,7 +20,7 @@ export const featuresData = [
         id: 2,
         icon: <IoPricetagOutline className="text-white" size={24} />,
         title: 'Smart Tagging',
-        content: 'Organize tasks with colorful tags. Filter by work, personal, urgent — exactly what you need.',
+        content: 'Organize tasks with colorful tags. Filter by pending, completed, overdue — exactly what you need.',
         accent: 'rgba(250, 109, 109, 0.15)'
 
     },

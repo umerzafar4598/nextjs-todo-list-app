@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Toaster } from "sonner";
 import { useAppSelector } from "@/store/hooks";
 import { selectTodoCounts } from "@/store/selectors/todoSelectors";
 import { ReduxProvider } from "@/components/ReduxProvider";
@@ -65,22 +64,6 @@ function DashboardContent({ userName, userEmail, userImage }: Omit<Props, "initi
 
     return (
         <div className="min-h-screen bg-[#080810]">
-            <Toaster
-                theme="dark"
-                position="bottom-right"
-                gap={8}
-                toastOptions={{
-                    classNames: {
-                        toast: "!bg-[#16161f] !border !border-white/10 !text-white/90 !shadow-2xl !rounded-2xl !font-medium",
-                        title: "!text-white/90 !text-sm !font-semibold",
-                        description: "!text-white/40 !text-xs",
-                        success: "!border-emerald-500/25 [&>[data-icon]]:!text-emerald-400",
-                        error: "!border-rose-500/25 [&>[data-icon]]:!text-rose-400",
-                        icon: "!mr-3",
-                    },
-                }}
-            />
-
             <DashboardNavbar
                 userName={userName}
                 userEmail={userEmail}
@@ -142,8 +125,6 @@ function DashboardContent({ userName, userEmail, userImage }: Omit<Props, "initi
     );
 }
 
-// Outer shell — owns the ReduxProvider so initialTodos seed the store
-// synchronously before any child renders
 export function DashboardShell({ initialTodos, userName, userEmail, userImage }: Props) {
     return (
         <ReduxProvider initialTodos={initialTodos}>

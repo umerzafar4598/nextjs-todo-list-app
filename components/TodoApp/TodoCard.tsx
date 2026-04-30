@@ -1,7 +1,5 @@
 "use client";
 
-// components/todos/TodoCard.tsx
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTodos } from "@/hooks/useTodos";
