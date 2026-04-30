@@ -1,36 +1,158 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Next.js Full-Stack Todo App
 
-## Getting Started
+A modern, full-stack **multi-user Todo List application** built with Next.js App Router.  
+Users can securely manage their tasks with authentication, deadlines, filtering, and a clean dashboard UI.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- 🔐 Authentication (Signup / Login)
+- 👤 Multi-user support
+- ✅ CRUD operations (Create, Read, Update, Delete todos)
+- 📅 Set deadlines for tasks
+- 📊 Dashboard stats:
+  - Total Todos
+  - Completed
+  - Pending
+  - Overdue
+- 🔍 Search todos by title
+- 🎯 Filter todos:
+  - All
+  - Completed
+  - Pending
+  - Overdue
+- ⚡ Server Actions (Next.js App Router)
+- 🧠 State management (Redux Toolkit)
+- 🎨 Responsive & modern UI
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Database:** PostgreSQL
+- **ORM:** Drizzle ORM
+- **Authentication:** Better Auth
+- **State Management:** Redux Toolkit 
+- **Styling:** Tailwind CSS
+
+---
+
+## 📂 Project Structure
+
+```
+app/            # App Router pages & layouts
+components/     # Reusable UI components
+lib/            # Auth, utilities, helpers
+db/             # Database config & schema (Drizzle)
+store/          # State management
+actions/         # Server actions (CRUD logic)
+```
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/umerzafar4598/nextjs-todo-list-app.git
+cd nextjs-todo-list-app
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+DATABASE_URL=your_database_url
+BETTER_AUTH_SECRET=your_secret
+BETTER_AUTH_URL=http://localhost:3000
+```
+
+---
+
+## ▶️ Run the Project
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧩 Key Concepts Used
 
-## Learn More
+- Server Actions for backend logic
+- Session-based authentication
+- Database abstraction with Drizzle ORM
+- State synchronization between client & server
+- Modular and scalable folder structure
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Deployment
 
-## Deploy on Vercel
+You can deploy easily on:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Vercel (recommended)
+- Docker (optional)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```
+
+---
+
+## 📌 Future Improvements
+
+- 🔔 Notifications for deadlines
+- 📱 Mobile optimization
+- 🧠 AI-based task suggestions
+- 📊 Advanced analytics
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a new branch
+3. Make your changes
+4. Submit a PR
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+**Umer Zafar**
+
+- GitHub: https://github.com/umerzafar4598
+
+---
+
+⭐ If you like this project, don't forget to star the repo!

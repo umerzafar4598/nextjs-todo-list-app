@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { AuthActionState } from "@/types/action-state";
+import { AuthActionState } from "@/types/auth-state";
 import { signInAction } from "@/actions/authAction";
 import { toast } from "sonner";
 

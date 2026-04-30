@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@/lib/auth'
-import { AuthActionState } from '@/types/action-state'
+import { AuthActionState } from '@/types/auth-state'
 import { signInSchema, signUpSchema } from '@/lib/validations/auth'
 import { headers } from 'next/headers'
 import { z } from 'zod'

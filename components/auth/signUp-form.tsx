@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, Lock, User, EyeOff, Eye, } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
-import { AuthActionState } from "@/types/action-state";
+import { AuthActionState } from "@/types/auth-state";
 import { signUpAction } from "@/actions/authAction";
 import { toast } from 'sonner'
 import { useRouter } from "next/navigation";
