@@ -1,22 +1,24 @@
-import { fetchTodosAction } from "@/actions/todosAction"
-import { DashboardShell } from "@/components/TodoApp/DashboardShell"
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
-import { redirect } from "next/navigation"
+// app/dashboard/page.tsx
 
-const Dashboard = async () => {
-    const session = await auth.api.getSession({ headers: await headers() })
-    if (!session) {
-        redirect('/login')
-    }
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { fetchTodosAction } from "@/actions/todosAction";
+import { DashboardShell } from "@/components/TodoApp/DashboardShell";
+
+export default async function DashboardPage() {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session?.user) redirect("/login");
+
     const result = await fetchTodosAction();
     const initialTodos = result.success ? result.data : [];
+
     return (
         <DashboardShell
             initialTodos={initialTodos}
-            userName={session.user.name ?? session.user.email}
+            userName={session.user.name ?? undefined}
+            userEmail={session.user.email}
+            userImage={session.user.image ?? null}
         />
-    )
+    );
 }
-
-export default Dashboard
